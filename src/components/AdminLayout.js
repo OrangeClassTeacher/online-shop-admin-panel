@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { Link, Outlet } from "react-router-dom";
 import { Container, Nav, Navbar, Row, Col, Button } from "react-bootstrap";
-
-import { url } from "./constant";
 import Loading from "./Loading";
 import Icon from "./Icon";
 import useFetch from "../custom-hooks/useFetch";
 import { useNavigate } from "react-router-dom";
+import { url } from "../pages/constant";
 
 export default function AdminLayout() {
   const { data, error, loading } = useFetch(url + "/menu", {});
@@ -29,9 +28,9 @@ export default function AdminLayout() {
   return (
     <Container fluid className="p-0">
       <Row>
-        <Col sm={3} className="bg-light p-0">
+        <Col sm={3} className="bg-light p-0 vh-100">
           <Navbar
-            bg="light"
+            // bg="light"
             expand="lg"
             className="d-flex flex-column text-white"
           >

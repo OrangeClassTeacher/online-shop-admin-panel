@@ -8,7 +8,7 @@ import FormLabel from "react-bootstrap/esm/FormLabel";
 import axios from "axios";
 import { MenuNew } from "./MenuNew";
 import { MenuList } from "./MenuList";
-const urlName = "http://localhost:9000/api/menu";
+import { url } from "./constant";
 
 export default function Menus() {
   const title = "Цэс";
@@ -23,7 +23,7 @@ export default function Menus() {
   const getMenus = () => {
     setLoading(true);
     axios
-      .get(urlName)
+      .get(url + "/menu")
       .then(({ data: { status, result } }) => {
         console.log(status, result);
         if (status) setMenus(result);
@@ -35,7 +35,7 @@ export default function Menus() {
   const onSave = (menuItem) => {
     if (menuItem.id) {
       axios
-        .put(`${urlName}/${menuItem.id}`, menuItem)
+        .put(`${url + "/menu"}/${menuItem.id}`, menuItem)
         .then((res) => {
           if (res.data.status) {
             // alert(res.data.message);
@@ -48,7 +48,7 @@ export default function Menus() {
         .finally(() => console.log("finally"));
     } else {
       axios
-        .post(urlName, menuItem)
+        .post(url + "/menu", menuItem)
         .then((res) => {
           if (res.data.status) {
             // alert(res.data.message);
@@ -65,20 +65,42 @@ export default function Menus() {
   const onDeleteSelected = (selected) => {
     const mes = window.confirm("Та устгахдаа итгэлтэй байна уу");
     if (mes) {
+      setLoading(true);
       axios
-        .post(`${urlName}/delete-batches-menu`, {
+        .post(`${url + "/menu"}/delete-batches-menu`, {
           deleteMenuIds: selected,
         })
         .then((res) => {
-          getMenus();
-          console.log(res.data.message);
+          if (res.data.status) {
+            getMenus();
+          } else {
+            alert(res.data.message);
+          }
         })
-        .catch((err) => console.log(err));
+        .catch((err) => console.log(err))
+        .finally(() => setLoading(false));
+    }
+  };
+  const onDelete = (id) => {
+    const mes = window.confirm("Та устгахдаа итгэлтэй байна уу");
+    if (mes) {
+      setLoading(true);
+      axios
+        .delete(`${url}/menu/${id}`)
+        .then((res) => {
+          if (res.data.status) {
+            getMenus();
+          } else {
+            alert(res.data.message);
+          }
+        })
+        .catch((err) => console.log(err))
+        .finally(() => setLoading(false));
     }
   };
 
   return (
-    <div className="row mx-auto">
+    <div className="row p-4">
       <div className="col-md-12">
         <div className="d-flex justify-content-between aligns-item-center">
           <h2>{title}</h2>
@@ -86,7 +108,7 @@ export default function Menus() {
             variant="primary"
             onClick={() => setSearchParams({ p: "new" })}
           >
-            New
+            Цэс нэмэх
           </Button>
         </div>
         <MenuList
@@ -94,6 +116,7 @@ export default function Menus() {
           setSearchParams={setSearchParams}
           menus={menus}
           onDeleteSelected={onDeleteSelected}
+          onDelete={onDelete}
         />
         {(searchParams.get("p") == "new" ||
           searchParams.get("p") == "edit") && (

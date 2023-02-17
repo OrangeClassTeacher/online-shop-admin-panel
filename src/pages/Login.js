@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { Button, Form, Alert } from "react-bootstrap";
-import { url } from "../components/constant";
+import { url } from "./constant";
 import { useNavigate } from "react-router-dom";
 
 export default function Login() {

@@ -5,7 +5,7 @@ import Form from "react-bootstrap/Form";
 import FormControl from "react-bootstrap/FormControl";
 import FormLabel from "react-bootstrap/esm/FormLabel";
 import axios from "axios";
-const urlName = "http://localhost:9000/api/menu";
+import { url } from "./constant";
 
 export const MenuNew = ({ searchParams, setSearchParams, title, onSave }) => {
   const [show, setShow] = useState(searchParams && true);
@@ -25,7 +25,7 @@ export const MenuNew = ({ searchParams, setSearchParams, title, onSave }) => {
   useEffect(() => {
     if (searchParams.get("p") == "edit" && searchParams.get("id")) {
       axios
-        .get(`${urlName}/${searchParams.get("id")}`)
+        .get(`${url}/menu/${searchParams.get("id")}`)
         .then((res) => {
           console.log(res.data);
 

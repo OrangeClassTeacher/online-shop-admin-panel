@@ -2,37 +2,38 @@ import React, { useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
-import FormControl from "react-bootstrap/FormControl";
-import FormLabel from "react-bootstrap/esm/FormLabel";
-import axios from "axios";
-const urlName = "http://localhost:9000/api/menu";
+// import FormControl from "react-bootstrap/FormControl";
+// import FormLabel from "react-bootstrap/esm/FormLabel";
+// import axios from "axios";
 
 export const MenuList = ({
   menus,
   onDeleteSelected,
   searchParams,
   setSearchParams,
+  onDelete,
 }) => {
   const [selected, setSelected] = useState([]);
 
   return (
-    <div className="table-responsive mt-3">
-      <div className="d-flex">
-        <div>Сонгогдсон: {selected.length}</div>
+    <div className="table-responsive">
+      <div className="d-flex m-2">
         <Button
           variant="secondary"
           size="xs"
           onClick={() => onDeleteSelected(selected)}
         >
-          Selected Delete
+          Selected Delete {selected.length}
         </Button>
       </div>
-      <table className="table">
-        <thead>
+      <table className="table table-striped table-hover">
+        <thead className="p-2">
           <th></th>
           <th>№</th>
           <th>Цэсний нэр</th>
           <th>Icon</th>
+          <th>Үүсгэсэн огноо</th>
+          <th>Үйлдлүүд</th>
         </thead>
         <tbody>
           {menus.map(({ id, menuName, iconName, createdDate }, index) => {
@@ -42,8 +43,14 @@ export const MenuList = ({
                 <td>
                   <Form.Check
                     value={false}
-                    onChange={() => {
-                      setSelected([...selected, id]);
+                    onChange={(e) => {
+                      console.log(id);
+                      if (e.target.checked) {
+                        setSelected([...selected, id]);
+                      } else {
+                        const deletedArr = selected.filter((e) => e !== id);
+                        setSelected(deletedArr);
+                      }
                     }}
                   />
                 </td>
@@ -61,7 +68,9 @@ export const MenuList = ({
                   >
                     Edit
                   </Button>
-                  <Button variant="secondary">Delete</Button>
+                  <Button variant="secondary" onClick={() => onDelete(id)}>
+                    Delete
+                  </Button>
                 </td>
               </tr>
             );
