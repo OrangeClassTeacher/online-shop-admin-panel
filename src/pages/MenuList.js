@@ -5,7 +5,7 @@ import Form from "react-bootstrap/Form";
 import FormControl from "react-bootstrap/FormControl";
 import FormLabel from "react-bootstrap/esm/FormLabel";
 import axios from "axios";
-const urlName = "http://localhost:8000/api/menu";
+const urlName = "http://localhost:9000/api/menu";
 
 export const MenuList = ({
   menus,
@@ -37,8 +37,6 @@ export const MenuList = ({
         <tbody>
           {menus.map(({ id, menuName, iconName, createdDate }, index) => {
             const date = new Date(createdDate);
-
-            console.log(date.toLocaleDateString());
             return (
               <tr>
                 <td>

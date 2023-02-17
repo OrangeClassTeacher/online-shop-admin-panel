@@ -5,7 +5,7 @@ import Form from "react-bootstrap/Form";
 import FormControl from "react-bootstrap/FormControl";
 import FormLabel from "react-bootstrap/esm/FormLabel";
 import axios from "axios";
-const urlName = "http://localhost:8000/api/menu";
+const urlName = "http://localhost:9000/api/menu";
 
 export const MenuNew = ({ searchParams, setSearchParams, title, onSave }) => {
   const [show, setShow] = useState(searchParams && true);
@@ -35,8 +35,6 @@ export const MenuNew = ({ searchParams, setSearchParams, title, onSave }) => {
         .catch((err) => console.log(err));
     }
   }, []);
-
-  console.log();
 
   return (
     <Modal show={show} onHide={onClose}>

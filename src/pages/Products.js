@@ -21,7 +21,7 @@ export default function Products() {
   const getProducts = () => {
     setLoading(true);
     axios
-      .get("http://localhost:8000/api/product")
+      .get("http://localhost:9000/api/product")
       .then(({ data: { status, result } }) => {
         console.log(status, result);
         if (status) setProducts(result);

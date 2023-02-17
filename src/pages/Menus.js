@@ -8,7 +8,7 @@ import FormLabel from "react-bootstrap/esm/FormLabel";
 import axios from "axios";
 import { MenuNew } from "./MenuNew";
 import { MenuList } from "./MenuList";
-const urlName = "http://localhost:8000/api/menu";
+const urlName = "http://localhost:9000/api/menu";
 
 export default function Menus() {
   const title = "Цэс";
