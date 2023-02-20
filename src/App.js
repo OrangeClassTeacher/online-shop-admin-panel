@@ -7,7 +7,7 @@ import Dashboard from "./pages/Dashboard";
 import Users from "./pages/Users";
 import Menus from "./pages/Menus";
 import Categories from "./pages/Categories";
-import Products from "./pages/Products";
+
 import ProductList from "./pages/ProductList";
 import Product from "./pages/Product";
 import Login from "./pages/Login";

@@ -28,32 +28,72 @@ export default function ProductList() {
   if (loading) return <Loading />;
 
   return (
-    <div className="container p-4">
-      <h2>Product list</h2>
-      <button
-        onClick={() => navigate("/admin/product")}
-        className="btn btn-warning"
-      >
-        Add Product
-      </button>
-      <div className="table-responsive">
-        <table className="table">
-          <tbody>
-            {data.map(({ price, productName, id, categoryId }, index) => (
-              <tr key={index}>
-                <td>{productName}</td>
-                <td>{price}</td>
-                <td>{categoryId}</td>
-                <td>
-                  <a href={`/admin/product/${id}`}>
-                    <span className="btn btn-warning">Edit</span>
-                  </a>
-                  <span className="btn btn-danger">Delete</span>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+    <div className="row p-4">
+      <div className="col-md-12">
+        <div className="d-flex justify-content-between aligns-item-center">
+          <h2>Product list</h2>
+          <button
+            onClick={() => navigate("/admin/product")}
+            className="btn btn-warning"
+          >
+            Add Product
+          </button>
+        </div>
+
+        <div className="table-responsive mt-4">
+          <table className="table">
+            <thead>
+              <th>№</th>
+              <th>Ангилал</th>
+              <th>Зураг</th>
+              <th>Нэр</th>
+              <th>Үнэ</th>
+              <th>Тоо ширхэг</th>
+              <th>Брендийн нэр</th>
+              <th>Хямдрах хувь</th>
+              <th>Хямдрал дуусах огноо</th>
+              <th>Үйлдлүүд</th>
+            </thead>
+            <tbody>
+              {data.map(
+                (
+                  {
+                    id,
+                    price,
+                    productName,
+                    quantity,
+                    brandId,
+                    salePercent,
+                    saleFinishDate,
+                    categoryId,
+                    thumbImage,
+                  },
+                  index
+                ) => (
+                  <tr key={index}>
+                    <td>{index + 1}</td>
+                    <td>{categoryId}</td>
+                    <td>
+                      <img width={50} src={thumbImage} alt="" />
+                    </td>
+                    <td>{productName}</td>
+                    <td>{price}</td>
+                    <td>{quantity}</td>
+                    <td>{brandId}</td>
+                    <td>{salePercent}</td>
+                    <td>{saleFinishDate}</td>
+                    <td>
+                      <a href={`/admin/product/${id}`} className="mx-2">
+                        <span className="btn btn-warning">Edit</span>
+                      </a>
+                      <span className="btn btn-danger">Delete</span>
+                    </td>
+                  </tr>
+                )
+              )}
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   );
